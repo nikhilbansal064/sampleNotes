@@ -31,7 +31,8 @@ class NoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observe the current note from ViewModel (which is loaded based on noteId from SavedStateHandle)
+        viewModel.loadNoteById(args.noteId)
+
         viewModel.currentNote.observe(viewLifecycleOwner) { note ->
             note?.let {
                 binding.noteNameEditText.setText(it.name)

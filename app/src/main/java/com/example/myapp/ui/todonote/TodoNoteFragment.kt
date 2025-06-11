@@ -35,6 +35,7 @@ class TodoNoteFragment : Fragment() {
 
         setupRecyclerView()
 
+        viewModel.loadNote(args.noteId)
         viewModel.currentNote.observe(viewLifecycleOwner) { note ->
             note?.let {
                 binding.todoNoteNameEditText.setText(it.name)

@@ -1,35 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
 
-    <TextView
-        android:id="@+id/noteNameTextView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceHeadline6"
-        tools:text="Note Title" />
+        android:orientation="vertical"
+        android:padding="12dp">
 
-    <TextView
-        android:id="@+id/noteContentPreviewTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textAppearance="?attr/textAppearanceBody2"
-        android:maxLines="2"
-        android:ellipsize="end"
-        tools:text="This is a preview of the note content..." />
+        <TextView
+            android:id="@+id/noteTypeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceCaption"
+            tools:text="Note Type" />
 
-    <TextView
-        android:id="@+id/noteDateTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="end"
-        android:textAppearance="?attr/textAppearanceCaption"
-        tools:text="May 10, 2023" />
+        <TextView
+            android:id="@+id/noteNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            tools:text="Note Title" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/noteContentPreviewTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:maxLines="2"
+            android:ellipsize="end"
+            tools:text="This is a preview of the note content..." />
+
+        <TextView
+            android:id="@+id/noteDateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="end"
+            android:textAppearance="?attr/textAppearanceCaption"
+            tools:text="May 10, 2023" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

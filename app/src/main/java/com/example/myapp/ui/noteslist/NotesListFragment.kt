@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapp.R
+import com.example.myapp.data.model.NoteType
 import com.example.myapp.databinding.FragmentNotesListBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -70,11 +71,10 @@ class NotesListFragment : Fragment() {
 
     private fun setupRecyclerView() {
         noteListAdapter = NoteListAdapter { note ->
-            // CURRENT BEHAVIOR: Still navigates to TodoNoteFragment for any item click.
-            // This needs to be addressed in a future step by implementing a way to
-            // distinguish note types (e.g., by adding a 'type' field to the Note entity
-            // or using a naming convention) and then navigating to the appropriate fragment.
-            val action = NotesListFragmentDirections.actionNotesListFragmentToTodoNoteFragment(note.noteId)
+            val action = when (note.noteType) {
+                NoteType.TEXT -> NotesListFragmentDirections.actionNotesListFragmentToNoteFragment(note.noteId)
+                NoteType.TODO -> NotesListFragmentDirections.actionNotesListFragmentToTodoNoteFragment(note.noteId)
+            }
             findNavController().navigate(action)
         }
         binding.notesRecyclerView.apply {

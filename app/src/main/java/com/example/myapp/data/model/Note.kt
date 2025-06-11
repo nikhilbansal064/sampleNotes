@@ -12,5 +12,8 @@ data class Note(
     var content: String,
 
     @ColumnInfo(name = "last_modified_date")
-    var lastModifiedDate: Long
+    var lastModifiedDate: Long,
+
+    @ColumnInfo(name = "note_type", defaultValue = "TEXT")
+    var noteType: NoteType = NoteType.TEXT
 )

@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.example.myapp.data.NoteRepository
 import com.example.myapp.data.local.NoteDatabase
 import com.example.myapp.data.model.Note
+import com.example.myapp.data.model.NoteType
 import com.example.myapp.data.model.TodoItem
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -23,16 +24,13 @@ class TodoNoteViewModel(
     private val _currentNote = MutableLiveData<Note?>()
     val currentNote: LiveData<Note?> = _currentNote
 
-    var noteId: Int? = 1
-    init {
-        noteId?.let {
-            loadNote(it) // Call the internal loadNote
-        }
-    }
+    var noteId: Int? = null
 
     // Renamed to avoid conflict with any external call if needed, and to clarify it's the init-path loading
-    private fun loadNote(id: Int) {
+    fun loadNote(id: Int) {
         viewModelScope.launch {
+            if (id == -1) return@launch
+            noteId = id
             repository.getNoteById(id).collect { note ->
                 _currentNote.postValue(note)
                 if (note != null && note.content.isNotBlank()) {
@@ -75,7 +73,8 @@ class TodoNoteViewModel(
                 val updatedNote = currentLoadedNote.copy(
                     name = name,
                     content = itemsJson,
-                    lastModifiedDate = System.currentTimeMillis()
+                    lastModifiedDate = System.currentTimeMillis(),
+                    noteType = NoteType.TODO
                 )
                 repository.updateNote(updatedNote)
             } else {
@@ -83,7 +82,8 @@ class TodoNoteViewModel(
                 val newNote = Note(
                     name = name,
                     content = itemsJson,
-                    lastModifiedDate = System.currentTimeMillis()
+                    lastModifiedDate = System.currentTimeMillis(),
+                    noteType = NoteType.TODO
                 )
                 repository.insertNote(newNote)
             }
