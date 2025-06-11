@@ -12,10 +12,9 @@ import kotlinx.coroutines.launch
 
 class TodoNoteViewModel(
     application: Application,
-    private val repository: NoteRepository, // Made repository injectable
-    private val savedStateHandle: SavedStateHandle
 ) : AndroidViewModel(application) {
 
+    //private val repository: NoteRepository = NoteRepository(NoteDatabase.getDatabase(application).noteDao())
     private val gson = Gson()
 
     private val _todoItemsLiveData = MutableLiveData<MutableList<TodoItem>>(mutableListOf())
@@ -24,15 +23,7 @@ class TodoNoteViewModel(
     private val _currentNote = MutableLiveData<Note?>()
     val currentNote: LiveData<Note?> = _currentNote
 
-    var noteId: Int? = savedStateHandle.get<Int>("noteId")?.takeIf { it != -1 }
-
-    // Secondary constructor for ViewModelProvider in Fragments/Activities
-    constructor(application: Application, savedStateHandle: SavedStateHandle) : this(
-        application,
-        NoteRepository(NoteDatabase.getDatabase(application).noteDao()),
-        savedStateHandle
-    )
-
+    var noteId: Int? = 1
     init {
         noteId?.let {
             loadNote(it) // Call the internal loadNote
@@ -42,7 +33,7 @@ class TodoNoteViewModel(
     // Renamed to avoid conflict with any external call if needed, and to clarify it's the init-path loading
     private fun loadNote(id: Int) {
         viewModelScope.launch {
-            repository.getNoteById(id).collect { note ->
+            /*repository.getNoteById(id).collect { note ->
                 _currentNote.postValue(note)
                 if (note != null && note.content.isNotBlank()) {
                     try {
@@ -55,7 +46,7 @@ class TodoNoteViewModel(
                 } else {
                     _todoItemsLiveData.postValue(mutableListOf()) // Default to empty if no content
                 }
-            }
+            }*/
         }
     }
 
@@ -86,7 +77,7 @@ class TodoNoteViewModel(
                     content = itemsJson,
                     lastModifiedDate = System.currentTimeMillis()
                 )
-                repository.updateNote(updatedNote)
+                //repository.updateNote(updatedNote)
             } else {
                 // Create new note
                 val newNote = Note(
@@ -94,7 +85,7 @@ class TodoNoteViewModel(
                     content = itemsJson,
                     lastModifiedDate = System.currentTimeMillis()
                 )
-                repository.insertNote(newNote)
+                //repository.insertNote(newNote)
             }
         }
     }

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -15,7 +17,7 @@ class NoteFragment : Fragment() {
     private var _binding: FragmentNoteBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: NoteViewModel
+    private val viewModel: NoteViewModel by viewModels()
     private val args: NoteFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -28,10 +30,6 @@ class NoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Initialize ViewModel, explicitly passing SavedStateHandle
-        viewModel = ViewModelProvider(this, SavedStateViewModelFactory(requireActivity().application, this, arguments)).get(NoteViewModel::class.java)
-
 
         // Observe the current note from ViewModel (which is loaded based on noteId from SavedStateHandle)
         viewModel.currentNote.observe(viewLifecycleOwner) { note ->

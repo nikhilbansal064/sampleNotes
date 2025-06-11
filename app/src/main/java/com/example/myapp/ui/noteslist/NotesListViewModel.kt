@@ -9,13 +9,8 @@ import com.example.myapp.data.local.NoteDatabase
 import com.example.myapp.data.model.Note
 
 // Primary constructor for production, secondary for testing
-class NotesListViewModel(application: Application, private val repository: NoteRepository) : AndroidViewModel(application) {
+class NotesListViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val repository: NoteRepository = NoteRepository(NoteDatabase.getDatabase(application).noteDao())
     val allNotes: LiveData<List<Note>> = repository.allNotes.asLiveData()
-
-    // Secondary constructor for ViewModelProvider in Fragments/Activities
-    constructor(application: Application) : this(
-        application,
-        NoteRepository(NoteDatabase.getDatabase(application).noteDao())
-    )
 }

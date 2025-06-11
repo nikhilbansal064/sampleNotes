@@ -5,18 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-// import com.example.myapp.R // Not strictly needed if using NavDirections
+import com.example.myapp.R
 import com.example.myapp.databinding.FragmentNotesListBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NotesListFragment : Fragment() {
 
     private var _binding: FragmentNotesListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: NotesListViewModel
+    private val viewModel: NotesListViewModel by viewModels()
     private lateinit var noteListAdapter: NoteListAdapter
 
     override fun onCreateView(
@@ -30,18 +32,13 @@ class NotesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(NotesListViewModel::class.java)
-
         setupRecyclerView()
 
-        viewModel.allNotes.observe(viewLifecycleOwner) { notes ->
+        /*viewModel.allNotes.observe(viewLifecycleOwner) { notes ->
             notes?.let {
                 noteListAdapter.submitList(it)
             }
-        }
-
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.example.myapp.R // Required for string resources
+        }*/
 
         binding.addNoteFab.setOnClickListener {
             showCreateNewNoteDialog()
