@@ -8,11 +8,7 @@ import androidx.room.PrimaryKey
 data class Note(
     @PrimaryKey(autoGenerate = true)
     val noteId: Int = 0,
-
-    @ColumnInfo(name = "name")
     var name: String,
-
-    @ColumnInfo(name = "content")
     var content: String,
 
     @ColumnInfo(name = "last_modified_date")

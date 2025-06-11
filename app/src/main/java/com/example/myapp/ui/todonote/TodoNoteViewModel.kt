@@ -14,7 +14,7 @@ class TodoNoteViewModel(
     application: Application,
 ) : AndroidViewModel(application) {
 
-    //private val repository: NoteRepository = NoteRepository(NoteDatabase.getDatabase(application).noteDao())
+    private val repository: NoteRepository = NoteRepository(NoteDatabase.getDatabase(application).noteDao())
     private val gson = Gson()
 
     private val _todoItemsLiveData = MutableLiveData<MutableList<TodoItem>>(mutableListOf())
@@ -33,7 +33,7 @@ class TodoNoteViewModel(
     // Renamed to avoid conflict with any external call if needed, and to clarify it's the init-path loading
     private fun loadNote(id: Int) {
         viewModelScope.launch {
-            /*repository.getNoteById(id).collect { note ->
+            repository.getNoteById(id).collect { note ->
                 _currentNote.postValue(note)
                 if (note != null && note.content.isNotBlank()) {
                     try {
@@ -46,7 +46,7 @@ class TodoNoteViewModel(
                 } else {
                     _todoItemsLiveData.postValue(mutableListOf()) // Default to empty if no content
                 }
-            }*/
+            }
         }
     }
 
@@ -77,7 +77,7 @@ class TodoNoteViewModel(
                     content = itemsJson,
                     lastModifiedDate = System.currentTimeMillis()
                 )
-                //repository.updateNote(updatedNote)
+                repository.updateNote(updatedNote)
             } else {
                 // Create new note
                 val newNote = Note(
@@ -85,7 +85,7 @@ class TodoNoteViewModel(
                     content = itemsJson,
                     lastModifiedDate = System.currentTimeMillis()
                 )
-                //repository.insertNote(newNote)
+                repository.insertNote(newNote)
             }
         }
     }

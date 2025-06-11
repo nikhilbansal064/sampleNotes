@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'com.example.myapp'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.myapp"
@@ -45,9 +45,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Room
-    implementation "androidx.room:room-runtime:2.5.0"
-    annotationProcessor "androidx.room:room-compiler:2.5.0"
-    implementation "androidx.room:room-ktx:2.5.0"
+    implementation "androidx.room:room-runtime:2.6.1"
+    kapt "androidx.room:room-compiler:2.6.1"
+    implementation "androidx.room:room-ktx:2.6.1"
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
