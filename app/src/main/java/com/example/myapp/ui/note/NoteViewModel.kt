@@ -16,31 +16,19 @@ class NoteViewModel(
     val currentNote: LiveData<Note?> = _currentNote
 
     // Store the noteId from navigation arguments
-    var noteId: Int? = /*savedStateHandle.get<Int>("noteId")?.takeIf { it != -1 }*/1
-
-    init {
-        noteId?.let {
-            viewModelScope.launch {
-                repository.getNoteById(it).collect { note ->
-                    _currentNote.postValue(note)
-                }
-            }
-        }
-    }
+    var noteId: Int? = null
 
     // loadNote is primarily triggered by noteId in init.
     // This explicit loadNote can be used if needed, but might be redundant.
-    fun loadNoteById(id: Int): LiveData<Note?> {
-        val liveData = MutableLiveData<Note?>()
+    fun loadNoteById(id: Int){
         viewModelScope.launch {
+            noteId = id
             repository.getNoteById(id).collect{ note ->
-                liveData.postValue(note)
                 if (id == this@NoteViewModel.noteId) { // If loading the primary note for this VM instance
                     _currentNote.postValue(note)
                 }
             }
         }
-        return liveData
     }
 
     fun saveNote(name: String, content: String) {

@@ -34,11 +34,11 @@ class NotesListFragment : Fragment() {
 
         setupRecyclerView()
 
-        /*viewModel.allNotes.observe(viewLifecycleOwner) { notes ->
+        viewModel.allNotes.observe(viewLifecycleOwner) { notes ->
             notes?.let {
                 noteListAdapter.submitList(it)
             }
-        }*/
+        }
 
         binding.addNoteFab.setOnClickListener {
             showCreateNewNoteDialog()
