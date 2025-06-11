@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:gravity="center_vertical">
+
+    <CheckBox
+        android:id="@+id/todoCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/todoTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="8dp"
+        android:textAppearance="?attr/textAppearanceBody1"
+        tools:text="This is a todo item" />
+
+    <!-- Optional: Add a delete button here if desired -->
+    <!-- ImageButton
+        android:id="@+id/deleteTodoItemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_delete"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Delete item" / -->
+
+</LinearLayout>

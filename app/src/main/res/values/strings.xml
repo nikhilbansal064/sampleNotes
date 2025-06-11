@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MyApp</string>
+    <string name="add_note">Add Note</string>
+    <string name="note_title_hint">Note Title</string>
+    <string name="note_content_hint">Enter your note here...</string>
+    <string name="save_note_button">Save</string>
+
+    <string name="todo_list_title_hint">Todo List Title</string>
+    <string name="add_new_item_hint">Add new item</string>
+    <string name="add_button_text">Add</string>
+    <string name="save_list_button">Save List</string>
+
+    <string name="create_new_note_dialog_title">Create New Note</string>
+    <string name="new_text_note_option">New Text Note</string>
+    <string name="new_todo_list_option">New Todo List</string>
+</resources>

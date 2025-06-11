@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/notesListFragment">
+
+    <fragment
+        android:id="@+id/notesListFragment"
+        android:name="com.example.myapp.ui.noteslist.NotesListFragment"
+        android:label="Notes"
+        tools:layout="@layout/fragment_notes_list" >
+        <action
+            android:id="@+id/action_notesListFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_notesListFragment_to_todoNoteFragment"
+            app:destination="@id/todoNoteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.example.myapp.ui.note.NoteFragment"
+        android:label="Note"
+        tools:layout="@layout/fragment_note" >
+        <argument
+            android:name="noteId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/todoNoteFragment"
+        android:name="com.example.myapp.ui.todonote.TodoNoteFragment"
+        android:label="Todo List"
+        tools:layout="@layout/fragment_todo_note" >
+        <argument
+            android:name="noteId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+
+</navigation>
