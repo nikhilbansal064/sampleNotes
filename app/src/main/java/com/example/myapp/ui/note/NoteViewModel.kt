@@ -11,7 +11,7 @@ class NoteViewModel(
     application: Application,
 ) : AndroidViewModel(application) {
 
-    //private val repository: NoteRepository = NoteRepository(NoteDatabase.getDatabase(application).noteDao())
+    private val repository: NoteRepository = NoteRepository(NoteDatabase.getDatabase(application).noteDao())
     private val _currentNote = MutableLiveData<Note?>()
     val currentNote: LiveData<Note?> = _currentNote
 
